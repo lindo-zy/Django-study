@@ -29,7 +29,7 @@ pip install django==VERSION(版本号)
 
 ```  
 *** 
-## 启动项目
+## 启动第一个项目
 windows：  
 cmd切换到工作目录
 ```
