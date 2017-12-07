@@ -9,7 +9,7 @@
 {% block title %}首页{% endblock title %}
 {% block content %}
     <ul>
-        {% for i in columns %}
+        {% for i in home_display_columns %}
             <li>
                 <a href="{{ i.get_absolute_url }}">{{ i.name }}</a>
             </li>

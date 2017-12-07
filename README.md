@@ -41,3 +41,7 @@ python manage.py runserver [port](可选，默认8000)
 ```
 启动Django服务，浏览器访问localhost:[port]（localhost:8000/127.0.0.1:8000） 
 ***
+1.建立项目  
+2.在templates文件夹下建立一个名为当前app名称的文件夹  
+3.修改setting文件  
+4.
