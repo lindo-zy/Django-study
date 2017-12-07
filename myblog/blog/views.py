@@ -1,36 +1,25 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from . import models
+from django.http import HttpResponseRedirect, HttpResponse
+from .forms import AddFroms
 
 
+# Create your views here.
 def index(request):
-    articles = models.Article.objects.all()
-    return render(request, 'blog/index.html', {'articles': articles})
+    if request.method == 'POST':
+        form = AddFroms(request.POST)
+        if form.is_valid():
+            a = form.cleaned_data['a']
+            b = form.cleaned_data['b']
+            return HttpResponse(str(int(a) + int(b)))
+    else:
+        form = AddFroms()
+
+    return render(request, 'blog/index.html', {'form': form})
 
 
-def article_page(request, article_id):
-    article = models.Article.objects.get(pk=article_id)
-    return render(request, 'blog/article_page.html', {'article': article})
+def article(request):
+    return render(request, 'blog/article.html')
 
 
-def edit_page(request, article_id):
-    if str(article_id) == '0':
-        return render(request, 'blog/edit_page.html')
-    article = models.Article.objects.get(pk=article_id)
-    return render(request, 'blog/edit_page.html', {'article': article})
-
-
-def edit_action(request):
-    title = request.POST.get('title', 'TITLE')
-    content = request.POST.get('content', 'CONTNENT')
-    article_id = request.POST.get('article_id', '0')
-    if article_id == '0':
-        models.Article.objects.create(title=title, content=content)
-        articles = models.Article.objects.all()
-        return render(request, 'blog/index.html', {'articles': articles})
-
-    article = models.Article.objects.get(pk=article_id)
-    article.title = title
-    article.content = content
-    article.save()
-    return render(request, 'blog/article_page.html', {'article': article})
+def edit(request):
+    return render(request, 'blog/edit.html')

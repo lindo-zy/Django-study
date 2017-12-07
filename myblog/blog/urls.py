@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 # -*- coding:utf-8 -*-
-from django.conf.urls import url, include
-from . import views
+from django.conf.urls import url
+from blog import views
 
+app_name = 'blog'
 urlpatterns = [
+    url(r'^index/$', views.index, name='index'),
+    url(r'^article/$', views.article, name='article'),
+    url(r'^edit/$', views.edit, name='edit'),
+    # url(r'^$', 'blog.views.index', name='add'),
 
-    url(r'^index/$', views.index),  # ^$约束空字符串
-    url(r'^article/(?P<article_id>[0-9]+)/$', views.article_page, name='article_page'),
-    url(r'^edit/(?P<article_id>[0-9]+)$', views.edit_page, name='edit_page'),
-    url(r'^edit/action$', views.edit_action, name='edit_action'),
 ]

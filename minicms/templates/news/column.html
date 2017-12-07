@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>栏目</title>
+</head>
+<body>
+{% extends "base.html" %}
+{% block title %}
+    {{ column.title }}
+{% endblock title %}
+
+{% block content %}
+    栏目简介：{{ column.intro }}
+    栏目文章列表：
+    <ul>
+        {% for i in column.article_set.all %}
+            <li>
+                <a href="{{ i.get_absolute_url }}">{{ i.title }}</a>
+            </li>
+
+        {% endfor %}
+
+    </ul>
+
+
+{% endblock content %}
+
+
+</body>
+</html>
